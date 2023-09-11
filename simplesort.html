@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>simplesort</title>
+</head>
+<body>
+<canvas width="1200" height="600"></canvas>
+<script>
+    let red = 20;
+    let green = 100;
+    let blue = 200;
+
+    function setColor() {
+        red = Math.floor(Math.random() * 256);
+        green = Math.floor(Math.random() * 256);
+        blue = Math.floor(Math.random() * 256);
+        return cx.fillStyle =`rgb(${blue},${red},${green})`;
+    }
+
+    let cx = document.querySelector("canvas").getContext("2d");
+
+    function branch(length, angle, scale) {
+        debugger
+        cx.fillRect(0,0,1,length);
+        if(length<3) return;
+        cx.save();
+        cx.translate(0,length);
+        cx.rotate(-angle);
+        branch(length*scale,angle,scale);
+        cx.rotate(2*angle);
+        branch(length*scale,angle,scale);
+        cx.restore();
+        setColor();
+    }
+    cx.translate(600,0);
+    setInterval(()=>branch(80,0.5,0.8), 100);
+</script>
+</body>
+</html>
